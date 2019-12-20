@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@mapbox/secret-shield": "^1.0.2",
+    "detect-secrets": "^1.0.5",
     "husky": "^3.1.0"
-  }
+  },
+  "dependencies": {}
 }
