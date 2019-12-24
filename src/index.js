@@ -38,27 +38,11 @@ const burpStream = stream => {
   })
 }
 
-const burpGrep = stream => {
-  return new Promise((resolve, reject) => {
-    const buffer = []
-    stream
-      .on('data', data => {
-        buffer.push(data)
-      })
-      .on('end', () => {
-        resolve(buffer.join('').toString().trim())
-      })
-      .on('error', err => {
-        reject(err)
-      })
-  })
-}
-
 const searcher = filePaths => {
   return Promise.all(rules.map(r => {
     const grep = spawn('grep', ['-Enr', r.pattern, filePaths], options)
     grep.stdout.pipe(process.stdout)
-    return burpGrep(grep.stdout)
+    return burpStream(grep.stdout)
   }))
 }
 
